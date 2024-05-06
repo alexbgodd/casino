@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three-Slot Roulette</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+        .frame {
+            background: linear-gradient(-45deg, #ff5733, #ffc300, #c70039, #900c3f);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s infinite alternate;
+            border: 10px solid #666;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+        
+        .slot-container {
+            display: flex;
+            transition: transform 3s ease-in-out;
+            position: absolute;
+        }
+        .slot {
+            width: 150px;
+            height: 150px;
+            border: 5px solid #777;
+            margin: 10px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .slot img {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #f10606;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <audio id="spinSound" src="playful-casino-slot-machine-jackpot-3-183921.mp3"></audio>
+    <audio id="winSound" src="playful-casino-slot-machine-jackpot-3-183921.mp3"></audio>
+
+    <div class="frame">
+        <div class="slot-container">
+            <div class="slot" id="slot1"></div>
+            <div class="slot" id="slot2"></div>
+            <div class="slot" id="slot3"></div>
+        </div>
+    </div>
+    <button onclick="spin()">Spin</button>
+
+    <script>
+        function spin() {
+            var slotContainer = document.querySelector('.slot-container');
+            slotContainer.style.transform = 'translateY(-1000px)'; // Adjust the value for more or less spinning
+
+            // Play spin sound
+            var spinSound = document.getElementById('spinSound');
+            spinSound.play();
+
+            setTimeout(function() {
+                var slot1 = document.getElementById('slot1');
+                var slot2 = document.getElementById('slot2');
+                var slot3 = document.getElementById('slot3');
+
+                // Replace these paths with the correct paths to your images
+                var images = [
+                    '235432534.jpeg',
+                    '8029023666816164539.jpeg',
+                    '374534.jpeg',
+                    '567657868.jpeg',
+                    '6346346.jpeg',
+                    '3е46346.jpeg',
+                    '5465464.jpeg',
+                    '7834543.jpeg',
+                    '756.jpeg',
+                    '7880.jpeg',
+                    '78989.jpeg',
+                    '53453453.jpeg',
+                    '8678678.jpeg',
+                    '888345.jpeg',
+                    '78989.jpeg',
+                    
+            
+            
+            
+                    // Add more images here
+                ];
+
+                 // Randomly select images for all slots
+        var randomIndex1 = Math.floor(Math.random() * images.length);
+        var randomIndex2 = Math.floor(Math.random() * images.length);
+        var randomIndex3 = Math.floor(Math.random() * images.length);
+
+        slot1.innerHTML = `<img src="${images[randomIndex1]}" alt="Image 1">`;
+        slot2.innerHTML = `<img src="${images[randomIndex2]}" alt="Image 2">`;
+        slot3.innerHTML = `<img src="${images[randomIndex3]}" alt="Image 3">`;
+
+
+                // Reset the slot container position
+                slotContainer.style.transform = 'translateY(0)';
+
+                // Check if all slots are showing the same image for a win
+                if (images[0] === images[randomIndex2] && images[0] === images[randomIndex3]) {
+                    // Play win sound
+                    var winSound = document.getElementById('winSound');
+                    winSound.play();
+                }
+            }, 1000); // Adjust the delay to match the transition duration
+        }
+    </script>
+</body>
+</html>
